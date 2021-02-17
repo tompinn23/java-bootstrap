@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+cd jdtcoresrc
+patch -p1 < ../build-gentoo.patch
+
+export JAVACMD="/usr/lib/jvm/usr/bin/jamvm"
+export BOOTCLASSPATH="/usr/lib/jvm/usr/share/jamvm/classes.zip:/usr/lib/jvm/usr/share/classpath/glibj.zip"
+export JAVAC="/usr/lib/jvm/bin/jikes"
+
+
+/usr/lib/jvm/usr/bin/ant "-Dbuild.compiler=jikes" -f compilejdtcorewithjavac.xml
+
+export CLASSPATH="/usr/lib/jvm/usr/share/classpath/glibj.zip"
+/usr/lib/jvm/usr/bin/ant ${ant_flags} -lib ecj.jar -f compilejdtcore.xml compile
+
+
+

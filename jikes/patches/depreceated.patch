@@ -1,0 +1,23 @@
+--- jikes-1.22/src/decl.cpp
++++ jikes-1.22-patched/src/decl.cpp
+@@ -2596,7 +2596,9 @@
+     //
+     if (control.option.deprecation &&
+         hidden_method -> IsDeprecated() &&
+-        ! method -> containing_type -> file_symbol -> IsClassOnly())
++        ! method -> containing_type -> file_symbol -> IsClassOnly() &&
++		! method -> IsDeprecated() &&
++		! InDeprecatedContext())
+     {
+         ReportSemError(SemanticError::DEPRECATED_METHOD_OVERRIDE,
+                        left_tok, right_tok, method -> Header(),
+--- jikes-1.22/src/error.cpp
++++ jikes-1.22-patched/src/error.cpp
+@@ -513,6 +513,7 @@
+     warning[DEPRECATED_FIELD] = WEAK_WARNING;
+     warning[DEPRECATED_METHOD] = WEAK_WARNING;
+     warning[DEPRECATED_CONSTRUCTOR] = WEAK_WARNING;
++	warning[DEPRECATED_METHOD_OVERRIDE] = WEAK_WARNING;
+ 
+     warning[UNNECESSARY_TYPE_IMPORT] = WEAK_WARNING;
+     warning[MULTIPLE_PUBLIC_TYPES] = WEAK_WARNING;

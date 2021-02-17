@@ -1,0 +1,27 @@
+--- jamvm-1.5.1/src/os/linux/x86_64/init.c
++++ jamvm-1.5.1.new/src/os/linux/x86_64/init.c
+@@ -20,7 +20,7 @@
+  */
+ 
+ #ifdef __linux__
+-#include <fpu_control.h>
++//#include <fpu_control.h>
+ #endif
+ 
+ /* Change the x87 FPU precision to double (64-bit) from the extended
+@@ -30,6 +30,7 @@
+ */
+ 
+ void setDoublePrecision() {
++/*
+ #ifdef __linux__
+     fpu_control_t cw;
+ 
+@@ -38,6 +39,7 @@
+     cw |= _FPU_DOUBLE;
+     _FPU_SETCW(cw);
+ #endif
++*/
+ }
+ 
+ void initialisePlatform() {
