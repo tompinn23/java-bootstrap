@@ -6,4 +6,4 @@ patch -p1 < depreceated.patch
 
 make DESTDIR="$1"
 
-make DESTDIR="$1/usr/lib/jvm" install
+make DESTDIR="$1" install

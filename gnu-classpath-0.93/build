@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-export JAVAC="/usr/lib/jvm/usr/bin/jikes"
+export JAVAC="/usr/bin/jikes"
 export BOOTCLASSPATH="none"
 
 ./configure --disable-Werror \
@@ -11,11 +11,11 @@ export BOOTCLASSPATH="none"
 	--disable-dssi \
 	--disable-alsa \
 	--disable-gjdoc \
-	--with-jikes="/usr/lib/jvm/usr/bin/jikes" \
-	--bindir="/usr/lib/jvm/usr/libexec/gnuclasspath-093" \
-	--with-glibj-dir="/usr/lib/jvm/usr/share/classpath" \
-	--includedir="/usr/lib/jvm/usr/include/classpath" \
-	--prefix="/usr/lib/jvm/usr"
+	--with-jikes="/usr/bin/jikes" \
+	--bindir="/usr/libexec/gnuclasspath-093" \
+	--with-glibj-dir="/usr/share/classpath" \
+	--includedir="/usr/include/classpath" \
+	--prefix="/usr"
 
 make DESTDIR="$1"
 make DESTDIR="$1" install

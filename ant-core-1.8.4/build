@@ -1,0 +1,31 @@
+#!/bin/sh -e
+
+export BOOTCLASSPATH="/usr/share/jamvm/classes.zip:/usr/share/classpath/glibj.zip"
+
+export JAVA_HOME="/usr/jamvm"
+#export JAVACMD="/usr/bin/jamvm"
+#export JAVAC="/usr/bin/jikes-wrapper"
+#export CLASSPATH="/usr/jamvm/lib/rt.jar"
+sed -i -e 's/depends="jars,test-jar"/depends="jars"/' build.xml
+#sed -i -e 's/<mkdir dir="${build.dir}"\/>//' build.xml
+#sed -i -e 's/<mkdir dir="${build.classes}"\/>//' build.xml
+#sed -i -e 's/<mkdir dir="${build.lib}"\/>//' build.xml
+export BOOTJAVAC_OPTS="-nowarn -verbose"
+export ANT_OPTS="-Xnocompact -Xnoinlining -verbose:class -verbose:jni -Dbuild.compiler=jikes -Dant.verbose=1"
+
+OLDHOME=$HOME
+export HOME=/tmp
+touch /tmp/.ant.properties
+touch .ant.properties
+
+bash bootstrap.sh -Dbuild.dir=build2
+#mkdir -pv $1/usr/lib/jvm/etc
+#mkdir -pv $1/usr/lib/jvm/usr/lib
+#mkdir -pv $1/usr/lib/jvm/usr/bin
+
+#cp -r lib/* $1/usr/lib/jvm/usr/lib/
+#cp -r etc/* $1/usr/lib/jvm/etc/
+#cp -r bin/ant $1/usr/lib/jvm/usr/bin/
+#cp -r bin/antRun $1/usr/lib/jvm/usr/bin/
+
+export HOME=$OLDHOME
